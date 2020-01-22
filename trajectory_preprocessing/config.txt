@@ -1,0 +1,4 @@
+#Path to writhe code directory:
+./
+#Path to working directory:
+./
