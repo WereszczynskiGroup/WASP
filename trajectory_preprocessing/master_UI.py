@@ -107,7 +107,6 @@ for i in range (nframes):
        for j in range (nbp-2*deleteatoms):
                f.write("%6f    %6f    %6f\n" % (wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
 
-               f.write("{0}\t{1}\t{2}\n".format("%.6f"%(wrline_axis[i][j][0]),"%.6f"%(wrline_axis[i][j][1]),"%.6f"%(wrline_axis[i][j][2])))
 
 f.close()
 
