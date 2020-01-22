@@ -17,7 +17,7 @@ parser.add_argument("startframe", help = "desired trajectory frame to begin anal
 parser.add_argument("endframe", help = "desired trajectory frame to end analysis on (1 indexed)", type = int)
 parser.add_argument("outfile", help = "specifies the names of the output files")
 parser.add_argument("--prmtop", help = "specifies name of the topology file (required for amber mdcrd trajectories only)")
-parser.add_argument("deleteatoms", help = "specifies the number of atoms to delete from the generated axis curve before analysis (not required for circular/closed DNA structures)", type = int)
+parser.add_argument("deleteatoms", help = "specifies the number of atoms to delete from each side of the generated axis curve before analysis (not required for circular/closed DNA structures)", type = int)
 parser.add_argument("-s", "--stride", help = "allows for only frames selected by the stride to be analyzed (default = 1, must be greater than or equal to 1)", default = "1", type = int)
 parser.add_argument("-d", "--debug", nargs='?', default = False, const = True, help = "writes atoms read from trajectory file and axis curve to files")
 parser.add_argument("-x", "--xcol", help = "specifies the column number (zero indexed) corresponding to the x coordinates in the PDB file (required for reading PDB files)", type = int)
