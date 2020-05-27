@@ -80,15 +80,15 @@ if args.filetype == ("mdcrd"):
 	if ((endframe - startframe+1)%stride == 0):
        		nframes = (endframe - startframe+1)/stride
 
-#Explicitly convert nframes to integer
-nframes = int(nframes)
 #calculates number of frames in stripped trajectory if the total number of frames is not divisible by the stride (double check this....)
 #the  +1 at the end of the line is to include the frame that cpptraj adds to the trajectory if a full stride cannot be completed
 #i.e trajin trajectory.mdcrd 1 102 10 reads 11 frames not 10
 
 	else:
         	nframes = (endframe - startframe+1)/stride + 1
-
+	
+	#explicitly convert nframes to integer
+	nframes = int(nframes)
 	x,y,z = amber_read("stripped_C1.mdcrd", nbp, nframes)
 
 #convert coordinates to float
