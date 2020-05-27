@@ -61,10 +61,12 @@ if workingDirectory[-1] != ("/"):
 if args.filetype == ("oxdna"):
 	x,y,z = read_oxDNA(incrd, startframe, endframe, nbp, stride)
 	nframes = len(x)/(2*nbp)
+	nframes = int(nframes)
 
 if args.filetype == ("pdb"):
 	x,y,z = read_pdb(incrd, startframe, endframe, nbp, stride, xcol)
 	nframes = len(x)/(2*nbp)
+	nframes = int(nframes)
 
 if args.filetype == ("mdcrd"):
 	
@@ -89,6 +91,7 @@ if args.filetype == ("mdcrd"):
 	
 	#explicitly convert nframes to integer
 	nframes = int(nframes)
+
 	x,y,z = amber_read("stripped_C1.mdcrd", nbp, nframes)
 
 #convert coordinates to float
