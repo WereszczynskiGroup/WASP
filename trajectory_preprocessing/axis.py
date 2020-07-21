@@ -125,12 +125,38 @@ def Twist(nframes, midpt_axis, nbp, xyz_coords):
 		twist.append(twist_frame)
 	return twist
 
-def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms):
-	wrline_axis = []
+def start_points(frame, twist, nbp):
+	
+	theta_m = 0
+	top = 0
+	bottom = nbp - 1
 
+	while (theta_m < 180.0):
+		theta_m += twist[frame][top]
+		top += 1
+
+	top -= 1
+
+        theta_m = 0
+	
+	while (theta_m < 180.0):
+		theta_m += twist[frame][bottom]
+		bottom -= 1
+
+	return top, bottom
+
+def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms, auto_delete):
+	wrline_axis = []
+	top = 0
+	bottom = nbp - 1
 	for i in range (0,nframes):
+		
+		if auto_delete == True and i ==0:
+			top, bottom = start_points(i, twist, nbp)
+			deleteatoms = (top + ((nbp - 1) - bottom))
+
 		wrline_frame = []
-		for j in range (0,nbp):
+		for j in range (top, bottom + 1):
 			theta_m = 0
 			pt_sum = np.zeros(3)
 			
@@ -145,7 +171,6 @@ def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms):
 				
 				if (j+k) > (nbp-1):
 					if (j-k) < 0:
-						print(j-k+nbp,j+k-nbp)
 						pt_sum += midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k-nbp]
 						theta_m += twist[i][j-k+nbp] + twist[i][j+k-nbp]
 					else:
@@ -174,10 +199,11 @@ def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms):
 		wrline_axis.append(wrline_frame)
 
 	if deleteatoms != 0:
-		for i in range(nframes):
-			del wrline_axis[i][nbp-deleteatoms:nbp]
-			del wrline_axis[i][0:deleteatoms]
+		if auto_delete == False:
+			for i in range(nframes):
+				del wrline_axis[i][nbp-deleteatoms:nbp]
+				del wrline_axis[i][0:deleteatoms]
 
-	return wrline_axis
+	return wrline_axis, deleteatoms
 
 
