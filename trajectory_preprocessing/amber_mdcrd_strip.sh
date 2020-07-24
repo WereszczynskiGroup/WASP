@@ -8,16 +8,15 @@ endframe=$5
 stride=$6
 
 cpptraj<<EOF
-parm ./$prmtop
-trajin ./$incrd $startframe $endframe $stride
+parm $prmtop
+trajin $incrd $startframe $endframe $stride
 strip !(@C1')
 trajout stripped_C1.mdcrd nobox
 run
 EOF
 
 cpptraj<<EOF
-parm ./$prmtop
+parm $prmtop
 parmstrip !(@C1')
 parmwrite out stripped_C1.prmtop nobox
 EOF
-
