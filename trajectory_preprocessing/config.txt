@@ -1,4 +1,4 @@
 #Path to writhe code directory:
-./
+../writhe_code
 #Path to working directory:
 ./
