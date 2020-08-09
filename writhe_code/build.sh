@@ -1,0 +1,13 @@
+sh makeFileDI.sh
+sh makeFileGenClosed.sh
+sh makeFileGenDI.sh
+sh makeFileGen.sh
+sh makeFileGenSmooth.sh
+sh makeFileGenStandard.sh
+sh makeFileGenTrajectoriesClosed.sh
+sh makeFileGenTrajectoriesDIClosed.sh
+sh makeFileGenTrajectoriesDI.sh
+sh makeFileGenTrajectories.sh
+sh makeFileGenTrajectoriesStar.sh
+sh makeFileGenTrajectoriesWinding.sh
+sh makeFileWinding.sh
