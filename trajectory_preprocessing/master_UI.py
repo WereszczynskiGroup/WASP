@@ -26,7 +26,7 @@ parser.add_argument("-pws", "--polarwrithestar", nargs='?', default = False, con
 parser.add_argument("-di", "--doubleintegral", nargs='?', default = False, const = True, help = "option to calculate the standard gaussian integral writhe")
 parser.add_argument("--smooth", nargs='?', default = False, const = True, help = "use smoothing routine on input axis curve for writhe calculation (recommended), does nothing when used with --doubleintegral")
 parser.add_argument("-ad", "--autodelete", nargs='?', default = False, const = True, help = "enable automatic endpoint handling for first frame (do not use for closed structures")
-
+parser.add_argument("-c", "--closed", nargs='?', default = False, const = True, help = "analyze closed curve using -pw or -di")
 args = parser.parse_args()
 
 #Checks to see if arguments with """"""optional argument""""" dependencies are satisfied
@@ -150,8 +150,8 @@ if args.debug == (True):
 			f.write("{0}\t{1}\t{2}\t{3}\n".format('H',wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
 	f.close()
 	print("done writing")
-#calculates polar writhe
-if args.polarwrithe == (True):
+#calculates polar writhe (open curve)
+if args.polarwrithe == (True) and args.closed == (False):
 	print("calculating Wp")
 	#checks if smoothing routine is requested
 	if args.smooth == (True):
@@ -170,6 +170,22 @@ if args.polarwrithestar == (True):
         else:
                 subprocess.call(shlex.split("%spolarWritheGenTrajectoryStar %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".pws")))
 
-if args.doubleintegral == (True):
+if args.doubleintegral == (True) and args.closed == (False):
 	print("calculating Wr")
 	subprocess.call(shlex.split("%sDIWritheGenTrajectory %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".di")))
+
+
+#calculates polar writhe (closed curve)
+if args.polarwrithe == (True) and args.closed == (True):
+	print("calculating Wp")
+	#checks if smoothing routine is requested
+	if args.smooth == (True):
+		subprocess.call(shlex.split("%swritheGenTrajectoryClosed %swrithe_input_axis %s %s %s %s smooth"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms),  str(1), str(outfile) + ".pw")))
+	
+	else:
+		subprocess.call(shlex.split("%spolarWritheGenTrajectory %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".pw")))
+
+#calculates double integral (closed curve)
+if args.doubleintegral == (True) and args.closed == (True):
+	print("calculating Wr")
+	subprocess.call(shlex.split("%sDIWritheGenTrajectoryClosed %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".di")))
