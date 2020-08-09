@@ -1055,6 +1055,18 @@ double localWrithe::DI(std::vector<point>& pointList){
   return sigsum/(2*PI);
 }
 
+double localWrithe::DIClosed(std::vector<point>& pointList){
+  pointList.push_back(pointList[0]);
+  int listSize = pointList.size();
+  double sigsum=0.0;
+  for(int i=0;i<listSize-1;i++){
+    for(int j=i+1;j< listSize-1;j++){
+      sigsum = sigsum +wij(pointList,listSize,i,j);
+     }
+  }
+  return sigsum/(2*PI);
+}
+
 
 
 

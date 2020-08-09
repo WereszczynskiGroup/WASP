@@ -44,6 +44,7 @@ public:
   double wij(std::vector<point>& pointList,int size,int i,int j);
   double acosC(double temp);
   double DI(std::vector<point>& pointList);
+  double DIClosed(std::vector<point>& pointList);
 private:
   double den,lambda;
   double writhepl;
