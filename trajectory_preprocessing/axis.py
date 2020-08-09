@@ -164,26 +164,30 @@ def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms, auto_delete):
 			pt_sum += midpt_ri4[i][j]
 			
 			k = 0
-
-			while (theta_m < 360.0):
-				k += 1
-				theta_mminus = theta_m
+			try:
+				while (theta_m < 360.0):
+					k += 1
+					theta_mminus = theta_m
 				
-				if (j+k) > (nbp-1):
-					if (j-k) < 0:
-						pt_sum += midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k-nbp]
-						theta_m += twist[i][j-k+nbp] + twist[i][j+k-nbp]
+					if (j+k) > (nbp-1):
+						if (j-k) < 0:
+							pt_sum += midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k-nbp]
+							theta_m += twist[i][j-k+nbp] + twist[i][j+k-nbp]
+						else:
+							pt_sum += midpt_ri4[i][j-k] + midpt_ri4[i][j+k-nbp]
+							theta_m += twist[i][j-k] + twist[i][j+k-nbp]	
 					else:
-						pt_sum += midpt_ri4[i][j-k] + midpt_ri4[i][j+k-nbp]
-						theta_m += twist[i][j-k] + twist[i][j+k-nbp]	
-				else:
-					if (j-k) < 0:
-						pt_sum += midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k]
-						theta_m += twist[i][j-k+nbp] + twist[i][j+k]
-					else:
-						pt_sum += midpt_ri4[i][j-k] + midpt_ri4[i][j+k]
-						theta_m += twist[i][j-k] + twist[i][j+k]
+						if (j-k) < 0:
+							pt_sum += midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k]
+							theta_m += twist[i][j-k+nbp] + twist[i][j+k]
+						else:
+							pt_sum += midpt_ri4[i][j-k] + midpt_ri4[i][j+k]
+							theta_m += twist[i][j-k] + twist[i][j+k]
+			except:
+				print("Error: The WrLINE method has failed on the conformation in frame " + str(i) " of the trajectory. Please remove this frame and try again")		
+		
 			weight = (360 - theta_mminus)/(theta_m - theta_mminus)
+
 			if (j-k) < 0 and (j+k) > (nbp-1):
 				pt_sum = pt_sum - (1-weight)*(midpt_ri4[i][j-k+nbp] + midpt_ri4[i][j+k-nbp])
 			elif (j-k) < 0 and (j+k) <= (nbp-1):
