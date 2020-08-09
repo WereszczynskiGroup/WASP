@@ -184,8 +184,9 @@ def axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms, auto_delete):
 							pt_sum += midpt_ri4[i][j-k] + midpt_ri4[i][j+k]
 							theta_m += twist[i][j-k] + twist[i][j+k]
 			except:
-				print("Error: The WrLINE method has failed on the conformation in frame " + str(i) " of the trajectory. Please remove this frame and try again")		
-		
+				print("Error: The WrLINE method has failed on the conformation in frame %s (one indexed) of the trajectory. Please remove this frame and try again" %i)
+				return
+	
 			weight = (360 - theta_mminus)/(theta_m - theta_mminus)
 
 			if (j-k) < 0 and (j+k) > (nbp-1):
