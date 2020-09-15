@@ -1,4 +1,5 @@
-# WASP
+#
+WASP
 Writhe Analysis Software Package (WASP)
 WASP is a software package for characterizing the topological development of ribbon structures particularly targeted at
 at use with molecular dynamics (MD) trajectories.
@@ -6,10 +7,12 @@ at use with molecular dynamics (MD) trajectories.
 ## Dependencies/Requirements
 ### General:
 Python 2.7 or Python 3+ (recommended)
+
 C++
+
 Bash
 
-###For Amber Trajectories:
+### For Amber Trajectories:
 Amber/AmberTools, specifically cpptraj
 
 ## Configuration
@@ -28,3 +31,6 @@ In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** i
 ## Usage
 
 WASP operates primarily through a CLI user-interface managed by the file **master\_UI.py** in the **trajectory\_preprocessing** directory.
+
+A comprehensive list of arguments can be obtained by running **master_UI.py** with the arguments *-h* or *--help*, i.e. `python master_UI.py -h`
+
