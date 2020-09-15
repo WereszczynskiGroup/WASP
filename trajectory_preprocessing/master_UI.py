@@ -10,7 +10,7 @@ from axis import *
 
 #declaring arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("filetype", choices = ["pdb","mdcrd","oxdna"], help = "trajectory filetype")
+parser.add_argument("filetype", choices = ["pdb","mdcrd","oxdna", "general"], help = "trajectory filetype")
 parser.add_argument("incrd", help = "input coordinate file name")
 parser.add_argument("nbp", help = "number of basepairs in the DNA structure", type = int)
 parser.add_argument("startframe", help = "desired trajectory frame to begin analysis on (1 indexed)", type = int)
@@ -62,6 +62,9 @@ if workingDirectory[-1] != ("/"):
 
 print("reading " + incrd)
 
+if args.filetype == ("general"):
+	subprocess.call(["cp", incrd, writheCodeFilePath + "writhe_input_axis"])
+
 if args.filetype == ("oxdna"):
 	x,y,z = read_oxDNA(incrd, startframe, endframe, nbp, stride)
 	nframes = len(x)/(2*nbp)
@@ -100,56 +103,58 @@ if args.filetype == ("mdcrd"):
 
 print("done reading")
 
-#convert coordinates to float
-x = x.astype(float)
-y = y.astype(float)
-z = z.astype(float)
+if args.filetype != ("general"):
+	#convert coordinates to float
+	x = x.astype(float)
+	y = y.astype(float)
+	z = z.astype(float)
 
-#run axis script
-print("generating axis")
-xyz_coords = read_file(x, y, z, nframes, nbp)
-midpt_ri4, midpt_2 = midpts(xyz_coords, nbp, nframes)
-midpt_axis = midpoint_axis(nbp, nframes, midpt_ri4)
-twist = Twist(nframes, midpt_axis, nbp, xyz_coords)
-wrline_axis, deleteatoms = axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms, auto_delete)
+	#run axis script
+	print("generating axis")
+	xyz_coords = read_file(x, y, z, nframes, nbp)
+	midpt_ri4, midpt_2 = midpts(xyz_coords, nbp, nframes)
+	midpt_axis = midpoint_axis(nbp, nframes, midpt_ri4)
+	twist = Twist(nframes, midpt_axis, nbp, xyz_coords)
+	wrline_axis, deleteatoms = axis_generate(nbp, nframes, midpt_ri4, twist, deleteatoms, auto_delete)
 
-#if autodelete is not used, the number of atoms deleted on each side of the helix is = to deleteatoms, so must be
-#multiplied by two to account for both ends of the helix
-if args.autodelete == False:
-	deleteatoms = 2*deleteatoms
+	#if autodelete is not used, the number of atoms deleted on each side of the helix is = to deleteatoms, so must be
+	#multiplied by two to account for both ends of the helix
+	if args.autodelete == False:
+		deleteatoms = 2*deleteatoms
 
-f = open("%s"%writheCodeFilePath + "writhe_input_axis","w")
+	f = open("%s"%writheCodeFilePath + "writhe_input_axis","w")
 
-#writes axis coordinates to file for use with the writhe scripts
-for i in range (nframes):
-       for j in range (nbp - deleteatoms):
-	       f.write("%6f    %6f    %6f\n" % (wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
-
-
-f.close()
-print("done generating axis")
-
-#writes axis curve and atoms read from original trajectory file out to xyz files for debugging
-if args.debug == (True):
-	print("writing debug")
-	f = open ("debug.xyz","w")
-	for i in range (len(x)/(nbp*2)):
-		f.write(str(nbp*2))
-		f.write("\n \n")
-		for j in range (nbp*2):
-			f.write("{0}\t{1}\t{2}\t{3}\n".format('H',x[nbp*i+j],y[nbp*i+j],z[nbp*i+j]))
-	f.close()
-
-	f = open("debug_axis.xyz","w")
+	#writes axis coordinates to file for use with the writhe scripts
 	for i in range (nframes):
-		f.write(str(nbp - deleteatoms))
-		f.write("\n \n")
-		
 		for j in range (nbp - deleteatoms):
-	
-			f.write("{0}\t{1}\t{2}\t{3}\n".format('H',wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
+			f.write("%6f	%6f    %6f\n" % (wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
+
+
 	f.close()
-	print("done writing")
+	print("done generating axis")
+
+	#writes axis curve and atoms read from original trajectory file out to xyz files for debugging
+	if args.debug == (True):
+		print("writing debug")
+		f = open (incrd + "debug_backbone.xyz","w")
+		for i in range (len(x)/(nbp*2)):
+			f.write(str(nbp*2))
+			f.write("\n \n")
+			for j in range (nbp*2):
+				f.write("{0}\t{1}\t{2}\t{3}\n".format('H',x[nbp*i+j],y[nbp*i+j],z[nbp*i+j]))
+		f.close()
+
+		f = open(incrd + "_debug_axis.xyz","w")
+		for i in range (nframes):
+			f.write(str(nbp - deleteatoms))
+			f.write("\n \n")
+		
+			for j in range (nbp - deleteatoms):
+	
+				f.write("{0}\t{1}\t{2}\t{3}\n".format('H',wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
+		f.close()
+		print("done writing")
+
 #calculates polar writhe (open curve)
 if args.polarwrithe == (True) and args.closed == (False):
 	print("calculating Wp")
