@@ -64,6 +64,7 @@ print("reading " + incrd)
 
 if args.filetype == ("general"):
 	subprocess.call(["cp", incrd, writheCodeFilePath + "writhe_input_axis"])
+	nframes = (endframe - startframe) + 1
 
 if args.filetype == ("oxdna"):
 	x,y,z = read_oxDNA(incrd, startframe, endframe, nbp, stride)
