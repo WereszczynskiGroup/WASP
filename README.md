@@ -29,9 +29,17 @@ In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** i
 
 ## Usage
 
+### User Interface
 WASP operates primarily through a CLI user-interface managed by the file **master\_UI.py** in the **trajectory\_preprocessing** directory.
 
-A comprehensive list of arguments can be obtained by running **master\_UI.py** with the arguments **-h** or **--help**, i.e. `python master\_UI.py -h`.  
+A comprehensive list of arguments can be obtained by running **master\_UI.py** with the arguments **-h** or **--help**, i.e. `python master_UI.py -h`.  
 
-Most arguments available to the user are sufficiently explained to the user by rrunning `python master\_UI.py -h`. However, several arguments are worthy of further explanation.
+Most arguments available to the user are sufficiently explained to the user by rrunning `python master_UI.py -h`. However, several arguments are worthy of further explanation:
+
+**deletepoints:** This argument specifies how many points should be deleted *on each side* of an axis curve and should be used (carefully) with open/linear DNA structures, i.e. DNA structures whose ends are not joined. For example, specifying `20` for the deletepoints argument will delete 20 points from each end of the axis, deleting a total of 40 points. ***deletepoints should be set to 0 if the DNA structure is closed (circular/knotted) or if the autodelete argument is being used instead***.
+
+**autodelete (-ad):** An alternative to **deletepoints** that attempts to automatically remove stray axis points by starting the axis routine one full helical turn into the DNA structure on both sides. This argument is meant to be used with open/linear DNA structures and **deletepoints** should be set to 0 if **autodelete** is used.
+
+**closed (-c, --closed):** This argument can be used to instruct WASP to use a separate routine for evaluating the polar writhe when analyzing closed DNA structures. At this time, the closed writhe routine and the regular polar writhe routine **(-pw)** are equivalent, so this argument is not necessary. 
+
 
