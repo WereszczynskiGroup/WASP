@@ -1,4 +1,4 @@
-#WASP
+# WASP
 Writhe Analysis Software Package (WASP)
 WASP is a software package for characterizing the topological development of ribbon structures particularly targeted at
 at use with molecular dynamics (MD) trajectories.
@@ -23,7 +23,7 @@ The **config.txt** file in the **trajectory\_preprocessing** directory can be mo
 
 If the writhe code will be stored in a different directory, simply change the default path for the writhe code to the full path to the new location.
 
-If a large number of trajectories will be analyzed in a different directory, the working directory path can be changed to the directory containing the trajectories in oder to avoid typing the full filepath to each trajectory when running analyses. For example, if test1.mdcrd, test2.mdcrd and test3.mdcrd are in the directory /home/temp/trajectories/, making the working directory /home/temp/trajectories/ will allow the user to run WASP without having to type /home/temp/trajectories/ in front of each file name (i.e. not having to type the full file path each time).
+If a large number of trajectories will be analyzed in a different directory, the working directory path can be changed to the directory containing the trajectories in oder to avoid typing the full filepath to each trajectory when running analyses. For example, if `test1.mdcrd, test2.mdcrd` and `test3.mdcrd` are in the directory `/home/temp/trajectories/`, making the working directory `/home/temp/trajectories/` will allow the user to run WASP without having to type `/home/temp/trajectories/` in front of each file name (i.e. not having to type the full file path each time).
 
 In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** in the **trajectory\_preprocessing** directory must be be executed in order to make the **amber_mdcrd_strip.sh** file fully executable by WASP.
 
