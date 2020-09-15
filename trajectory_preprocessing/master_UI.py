@@ -137,7 +137,7 @@ if args.filetype != ("general"):
 	#writes axis curve and atoms read from original trajectory file out to xyz files for debugging
 	if args.debug == (True):
 		print("writing debug")
-		f = open (incrd + "debug_backbone.xyz","w")
+		f = open (incrd + "_debug_backbone.xyz","w")
 		for i in range (len(x)/(nbp*2)):
 			f.write(str(nbp*2))
 			f.write("\n \n")
