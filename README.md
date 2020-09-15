@@ -60,7 +60,7 @@ Running this will result in the following:
 
 1. The **minicircle.mdcrd** trajectory will be read into cpptraj along with the **minicircle.prmtop** topology file
 2. All atoms will be stripped from the trajectory except for the C1' atoms on the DNA backbone necessary for calculating the DNA axis
-3. Frames [30,100] will be analyzed for a total of 70 frames starting on frame 30 and ending on frame 100
+3. Frames [30, 100] will be analyzed for a total of 70 frames starting on frame 30 and ending on frame 100
 4. The C1' atoms on the backbone and the axis curve will both be written to trajectory files named **minicircle.mdcrd\_debug\_backbone.xyz** and **minicircle.mdcrd\_debug\_axis.xyz** respectively
 5. No atoms will be deleted from the axis curve prior to writhe analysis
 6. The polar writhe (Wp) and the double integral writhe will be calculated for each of the 70 frames and written to files named **minicircle\_data.pw** and **minicircle\_data.di** respectively
@@ -77,10 +77,24 @@ Running this will result in the following:
 
 1. The C1' atoms on the minicircle backbone will be read in every 10th frame (**--stride 10**) between frames [1,100] and used to calculate an axis curve
 2. WASP will look for the x-coordinates in the 6th column (zero indexed) of the PDB file
-2. Every 10th frame on the interval [1,100] will be analyzed for a total of 10 frames
+2. Every 10th frame on the interval [1, 100] will be analyzed for a total of 10 frames
 3. The C1' atoms on the backbone and the axis curve will both be written to trajectory files named **minicircle.pdb\_debug\_backbone.xyz** and **minicircle.pdb\_debug\_axis.xyz** respectively
 4. No atoms will be deleted from the axis curve prior to writhe analysis
 5. The polar writhe (Wp) and the double integral writhe will be calculated for each of the 10 frames and written to files named **minicircle\_data.pw** and **minicircle\_data.di** respectively
 6. The smoothing routine will be used for the Wp calculation
 7. The closed Wp routine will be used for the Wp calculation
+
+#### Analyzing a DNA Minicircle (General Format Trajectory)
+
+For this example, we will analyze a DNA minicircle ***axis curve trajectory*** generated from the same minicircle trajectory as used in the previous examples. Since the general format assumes that the file give is already an axis curve, WASP will skip straight to the writhe caluculation routines and many of the WASP functionalities are not able to be used.
+
+`python master_UI.py ../examples/minicircle.general 108 1 100 minicircle_data 0 -pw -di --smooth -c`
+
+Running this will result in the following:
+
+1. The entire trajectory will be read in from frame 1 to 100 ([1, 100]). **startframe** and **endframe** must ***always*** be the very first and very last frames in a general format trajectory.
+2. No atoms will be deleted from the axis curve prior to writhe analysis
+3. The polar writhe (Wp) and the double integral writhe will be calculated for each frame and written to files named **minicircle\_data.pw** and **minicircle\_data.di** respectively
+4. The smoothing routine will be used for the Wp calculation
+5. The closed Wp routine will be used for the Wp calculation
 
