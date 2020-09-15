@@ -9,5 +9,9 @@ Python 2.7 or Python 3+ (recommended)
 C++
 Bash
 
-#For Amber Trajectories:
+###For Amber Trajectories:
 Amber/AmberTools, specifically cpptraj
+
+## Usage
+
+WASP operates primarily through a CLI user-interface managed by the file **master\_UI.py** in the **trajectory\_preprocessing** directory.
