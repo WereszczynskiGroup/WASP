@@ -32,14 +32,37 @@ In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** i
 ### User Interface
 WASP operates primarily through a CLI user-interface managed by the file **master\_UI.py** in the **trajectory\_preprocessing** directory.
 
-A comprehensive list of arguments can be obtained by running **master\_UI.py** with the arguments **-h** or **--help**, i.e. `python master_UI.py -h`.  
+A comprehensive list of arguments can be obtained by running **master\_UI.py** with the arguments **-h** or **--help**, i.e. `python master_UI.py -h` or by running `python master_UI.py` with no arguments at all.
 
 Most arguments available to the user are sufficiently explained to the user by rrunning `python master_UI.py -h`. However, several arguments are worthy of further explanation:
 
-**deletepoints:** This argument specifies how many points should be deleted *on each side* of an axis curve and should be used (carefully) with open/linear DNA structures, i.e. DNA structures whose ends are not joined. For example, specifying `20` for the deletepoints argument will delete 20 points from each end of the axis, deleting a total of 40 points. ***deletepoints should be set to 0 if the DNA structure is closed (circular/knotted) or if the autodelete argument is being used instead***.
+**deleteatoms:** This argument specifies how many points should be deleted *on each side* of an axis curve and should be used (carefully) with open/linear DNA structures, i.e. DNA structures whose ends are not joined. For example, specifying `20` for the deleteatoms argument will delete 20 points from each end of the axis, deleting a total of 40 points. ***deleteatoms should be set to 0 if the DNA structure is closed (circular/knotted) or if the autodelete argument is being used instead***.
 
-**autodelete (-ad):** An alternative to **deletepoints** that attempts to automatically remove stray axis points by starting the axis routine one full helical turn into the DNA structure on both sides. This argument is meant to be used with open/linear DNA structures and **deletepoints** should be set to 0 if **autodelete** is used.
+**autodelete (-ad):** An alternative to **deleteatoms** that attempts to automatically remove stray axis points by starting the axis routine one full helical turn into the DNA structure on both sides. This argument is meant to be used with open/linear DNA structures and **deleteatoms** should be set to 0 if **autodelete** is used.
 
 **closed (-c, --closed):** This argument can be used to instruct WASP to use a separate routine for evaluating the polar writhe when analyzing closed DNA structures. At this time, the closed writhe routine and the regular polar writhe routine **(-pw)** are equivalent, so this argument is not necessary. 
 
+**smooth (--smooth):** Enables a smoothing routine used to improve accuracy when calculating Wp and Wp\* (recommended)
 
+**debug (-d, --debug):** Writes the backbone atoms used for axis curve calculation and the generated axis curve to separate trajectory files. These trajectory files are XYZ trajectory files that meet the specifications required to be read by VMD. This option is useful for determining how many atoms to delete from an axis curve if analyzing a linear DNA helix with the **deleteatoms** option.
+
+### Examples
+
+Sample trajectory files that can be used to test WASP can be found in the **examples** directory. We will demonstrate how to use the functionalities of WASP using these example trajectories. For these examples, we assume that the config.txt file is left as the default.
+
+#### Analyzing a DNA Minicircle (Amber Trajectory)
+
+For the first example, we will analyze a DNA minicircle trajectory genereated from an Amber MD simulation. The file **minicircle.mdcrd** in the **examples** directory represents a 100 frame trajectory of a 108 base pair minicircle. We will accomplish the analysis by running (in the trajectory\_preprocessing directory):
+
+`python master_UI.py mdcrd ../examples/minicircle.mdcrd 108 30 100 minicircle_data 0 --prmtop minicircle.prmtop -pw -di --smooth -c -d`
+
+Running this code will result in the following:
+
+1. The **minicircle.mdcrd** trajectory will be read into cpptraj along with the **minicircle.prmtop** topology file
+2. All atoms will be stripped from the trajectory except for the C1' atoms on the DNA backbone necessary for calculating the DNA axis
+3. Frames [30,100] will be analyzed for a total of 70 frames starting on frame 30 and ending on frame 100
+4. The C1' atoms on the backbone and the axis curve will both be written to trajectory files named **minicircle.mdcrd\_debug\_backbone.xyz** and **minicircle.mdcrd\_debug\_axis.xyz** respectively
+5. No atoms will be deleted from the axis curve prior to writhe analysis
+6. The polar writhe (Wp) and the double integral writhe will be calculated for each of the 70 frames and written to files named **minicircle\_data.pw** and **minicircle\_data.di** respectively
+7. The smoothing routine will be used for the Wp calculation
+8. The closed Wp routine will be used for the Wp calculation
