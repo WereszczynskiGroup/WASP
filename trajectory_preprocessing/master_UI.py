@@ -84,14 +84,14 @@ if args.filetype == ("mdcrd"):
 #note that cpptraj is 1 indexed in terms of frame count
 
 	if ((endframe - startframe+1)%stride == 0):
-       		nframes = (endframe - startframe+1)/stride
+		nframes = (endframe - startframe+1)/stride
 
 #calculates number of frames in stripped trajectory if the total number of frames is not divisible by the stride (double check this....)
 #the  +1 at the end of the line is to include the frame that cpptraj adds to the trajectory if a full stride cannot be completed
 #i.e trajin trajectory.mdcrd 1 102 10 reads 11 frames not 10
 
 	else:
-        	nframes = (endframe - startframe+1)/stride + 1
+		nframes = (endframe - startframe+1)/stride + 1
 	
 	#explicitly convert nframes to integer
 	nframes = int(nframes)
@@ -123,7 +123,7 @@ f = open("%s"%writheCodeFilePath + "writhe_input_axis","w")
 #writes axis coordinates to file for use with the writhe scripts
 for i in range (nframes):
        for j in range (nbp - deleteatoms):
-               f.write("%6f    %6f    %6f\n" % (wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
+	       f.write("%6f    %6f    %6f\n" % (wrline_axis[i][j][0],wrline_axis[i][j][1],wrline_axis[i][j][2]))
 
 
 f.close()
@@ -164,11 +164,11 @@ if args.polarwrithe == (True) and args.closed == (False):
 if args.polarwrithestar == (True):
 	print("calculating Wp*")
 	#checks if smoothing routine is requested
-        if args.smooth == (True):
-                subprocess.call(shlex.split("%spolarWritheGenTrajectoryStar %swrithe_input_axis %s %s %s %s smooth"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms),  str(1), str(outfile) + ".pws")))
+	if args.smooth == (True):
+		subprocess.call(shlex.split("%spolarWritheGenTrajectoryStar %swrithe_input_axis %s %s %s %s smooth"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms),  str(1), str(outfile) + ".pws")))
 
-        else:
-                subprocess.call(shlex.split("%spolarWritheGenTrajectoryStar %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".pws")))
+	else:
+		subprocess.call(shlex.split("%spolarWritheGenTrajectoryStar %swrithe_input_axis %s %s %s %s"%(str(writheCodeFilePath), str(writheCodeFilePath),str(nframes), str(nbp-2*deleteatoms), str(1), str(outfile) + ".pws")))
 
 if args.doubleintegral == (True) and args.closed == (False):
 	print("calculating Wr")
