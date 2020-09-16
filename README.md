@@ -14,6 +14,11 @@ WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (
   - [Usage](#usage)
     - [User Interface](#user-interface)
     - [Examples](#examples)
+      - [Analyzing a DNA Minicircle (Amber Trajectory)](#analyzing-a-dna-minicircle-amber-trajectory)
+      - [Analyzing a DNA Minicircle (PDB Trajectory)](#analyzing-a-dna-minicircle-pdb-trajectory)
+      - [Analyzing a DNA Minicircle (General Format Trajectory)](#analyzing-a-dna-minicircle-general-format-trajectory)
+      - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, autodelete)](#analyzing-a-linear-dna-plectoneme-oxdna-trajectory-autodelete)
+      - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, deleteatoms)](#analyzing-a-linear-dna-plectoneme-oxdna-trajectory-deleteatoms)
   - [Output Formats](#output-formats)
   - [References](#references)
 
