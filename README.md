@@ -20,7 +20,7 @@ WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (
       - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, autodelete)](#analyzing-a-linear-dna-plectoneme--oxdna-trajectory--autodelete-)
       - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, deleteatoms)](#analyzing-a-linear-dna-plectoneme--oxdna-trajectory--deleteatoms-)
   * [Output Formats](#output-formats)
-  * [References](#references)
+  * [References](# References)
 
 ## Dependencies/Requirements
 ### General:
