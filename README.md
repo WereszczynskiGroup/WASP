@@ -7,8 +7,8 @@ WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (
 
 - [WASP](#wasp)
   - [Dependencies/Requirements](#dependenciesrequirements)
-    - [General:](#general)
-    - [For Amber Trajectories:](#for-amber-trajectories)
+    - [General](#general)
+    - [For Amber Trajectories](#for-amber-trajectories)
   - [Configuration](#configuration)
   - [Input File Formats](#input-file-formats)
   - [Usage](#usage)
@@ -23,14 +23,14 @@ WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (
   - [References](#references)
 
 ## Dependencies/Requirements
-### General:
+### General
 Python 2.7 or Python 3+ (recommended)
 
 C++
 
 Bash
 
-### For Amber Trajectories:
+### For Amber Trajectories
 Amber/AmberTools, specifically cpptraj
 
 ## Configuration
