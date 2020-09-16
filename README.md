@@ -104,7 +104,7 @@ Running this will result in the following:
 
 #### Analyzing a DNA Minicircle (General Format Trajectory)
 
-For this example, we will analyze a DNA minicircle ***axis curve trajectory*** generated from the same minicircle trajectory as used in the previous examples. Since the general format assumes that the file give is already an axis curve, WASP will skip straight to the writhe caluculation routines and many of the WASP functionalities are not able to be used. For general trajectories, the **nbp** argument is simply the number of points on the axis curve. This time, we run (in the trajectory\_preprocessing directory):
+For this example, we will analyze a DNA minicircle ***axis curve trajectory*** generated from the same minicircle trajectory as used in the previous examples. Since the general format assumes that the file give is already an axis curve, WASP will skip straight to the writhe caluculation routines and many of the WASP functionalities are not able to be used. For general trajectories, the **nbp** argument is simply the number of points on the axis curve in each frame. This time, we run (in the trajectory\_preprocessing directory):
 
 `python master_UI.py general ../examples/minicircle.general 108 1 100 minicircle_data 0 -pw -di --smooth -c`
 
@@ -147,3 +147,20 @@ Running this will result in the following:
 5. The C atoms on the backbone and the axis curve will both be written to trajectory files named **plectoneme.oxdna\_debug\_backbone.xyz** and **plectoneme.oxdna\_debug\_axis.xyz** respectively in the **examples** directory
 6. The polar writhe (Wp) and the extended polar writhe (Wp\*) will be calculated fo each frame included in the stride and written to files named **plectoneme\_data.pw** and **plectoneme_data.pws** respectively
 7. The smoothing routine will be used for the Wp and Wp\* calculations
+
+## Output Formats
+
+Output files that result from Wp or Wp\* have five components and look like the following:
+
+```
+-0.0230357 0.0235573 0.000521591 {0} 1
+0.274211 0.160476 0.434687 {0} 2
+0.273186 0.247644 0.520831 {0 0 0 0 0 0} 3
+0.313301 0.458862 0.772162 {0 0 0 0 0 0} 4
+0.319946 0.814396 1.13434 {0 0 0 0 0 0} 5
+0.141583 1.06685 1.20843 {0} 6
+0.260391 1.13204 1.39243 {0} 7
+0.147154 1.22889 1.37604 {0} 8
+```
+
+In both cases, the first
