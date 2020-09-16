@@ -36,7 +36,7 @@ Amber/AmberTools, specifically cpptraj
 ## Configuration
 Prior to usage, several actions must be taken to build/configure WASP. 
 
-In order to compile the writhe code, it is necessary to execute the **build.sh**executable in the **writhe\_code** directory which can be done by running the command `sh build.sh` in the **writhe\_code** directory.
+In order to compile the writhe code, it is necessary to execute the **build.sh** executable in the **writhe\_code** directory which can be done by running the command `sh build.sh` in the **writhe\_code** directory.
 
 The **config.txt** file in the **trajectory\_preprocessing** directory can be modified if the writhe code is planned to be stored somewhere other than its default location or if a large number of trajectories will be analyzed in a different directory. This file is whitespace sensitive and its format should not be altered. 
 
