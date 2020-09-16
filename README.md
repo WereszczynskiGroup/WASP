@@ -161,6 +161,23 @@ Output files that result from Wp or Wp\* have five components and look like the 
 0.141583 1.06685 1.20843 {0} 6
 0.260391 1.13204 1.39243 {0} 7
 0.147154 1.22889 1.37604 {0} 8
+
 ```
 
-In both cases, the first
+For both Wp and Wp\* output files, the first column corresponds to the local component of the writhe (Wpl), the second column corresponds to the nonlocal component of the writhe (Wpnl) and the third column corresponds to the total Wp or Wp\* value (Wp + Wpnl). The last column indicates the frame number. The numbers between the curly brackets list the integer windings for every subsection pair of the curve, but are likely irrelevant for most analyses.
+
+Output files that result from double integral writhe calculations have 2 components and look like the following:
+
+```
+0.00143835 1
+0.534908 2
+0.604642 3
+0.791726 4
+1.11398 5
+1.28044 6
+1.42515 7
+1.42484 8
+
+```
+
+In this case, the first column is the writhe value and the second column is the frame number.
