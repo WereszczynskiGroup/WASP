@@ -27,6 +27,22 @@ If a large number of trajectories will be analyzed in a different directory, the
 
 In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** in the **trajectory\_preprocessing** directory must be be executed in order to make the **amber_mdcrd_strip.sh** file fully executable by WASP.
 
+## Input File Formats
+
+Currently, WASP is equipped to handle four different file formats:
+
+1. Amber mdcrd trajectories (with associated topology (prmtop) files)
+2. oxDNA xyz trajectories
+3. PDB trajectories
+4. "General format" trajectories (see below)
+
+Examples of each format can be found in the **examples** directory for reference.
+
+Using the general format option tells WASP that the trajectory you are giving it is ***already an axis curve***. In other words, you are feeding WASP the exact curve that you want to calculate the writhe of, and the axis curve calculation is skipped. This allows WASP to be used more generally if you wish to calculate an axis curve for your DNA structure using some other method prior to using WASP to calculate the writhe or if you want to analyze the writhing of a curve that is not DNA or not a result of a MD trajectory (i.e. coronal flux ropes or rod filaments). This format consists of a tab spaced cartersian (x,y,z) coordinates on each line with no whitespace between lines. It is important to note that the number of points on the curve should be the same in every frame, as WASP has no way of telling otherwise. When using general format trajectories, some functionalities of WASP are unable to be used such as the ability to stride. See the general format example below for more information.
+
+
+For PDB files, the --xcol argument must be specified. The user should provide the column number (zero-indexed) in the PDB file that contains the x coordinates. In the example PDB trajectory in the **examples** directory, the --xcol argument should be 6.
+
 ## Usage
 
 ### User Interface
