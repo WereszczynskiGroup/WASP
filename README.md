@@ -32,9 +32,11 @@ In order to analyze Amber mdcrd trajectories, the bash executable **build.sh** i
 Currently, WASP is equipped to handle four different file formats:
 
 1. Amber mdcrd trajectories (with associated topology (prmtop) files)
-2. oxDNA xyz trajectories
-3. PDB trajectories
+2. oxDNA xyz trajectories ***Note: WASP will look for any and all atoms named C in the trajectory file to calculate the axis curve. If no C atoms are present, it will not calculate an axis curve. Similarly, if any other structures are present that contain C atoms that you are not trying to analyze, it may try to use those also***
+3. PDB trajectories ***Note: WASP will look for any and all atoms named C1' in the trajectory file to calculate the axis curve. If no C atoms are present, it will not calculate an axis curve. Similarly, if any other structures are present that contain C atoms that you are not trying to analyze, it may try to use those also***
 4. "General format" trajectories (see below)
+
+If you have a molecular dynamics trajectory that is not one of these formats, the trajectory can be made "WASP friendly" by converting the trajectory to PDB format using VMD. 
 
 Examples of each format can be found in the **examples** directory for reference.
 
