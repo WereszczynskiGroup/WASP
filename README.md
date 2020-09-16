@@ -4,6 +4,24 @@ WASP is a software package for characterizing the topological development of rib
 at (but not limited to) use with molecular dynamics (MD) trajectories.
 
 WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (Wp\*) and the double integral writhe (Wr) of various ribbon structures such as DNA helices.
+
+- [WASP](#wasp)
+  * [Dependencies/Requirements](#dependencies-requirements)
+    + [General:](#general-)
+    + [For Amber Trajectories:](#for-amber-trajectories-)
+  * [Configuration](#configuration)
+  * [Input File Formats](#input-file-formats)
+  * [Usage](#usage)
+    + [User Interface](#user-interface)
+    + [Examples](#examples)
+      - [Analyzing a DNA Minicircle (Amber Trajectory)](#analyzing-a-dna-minicircle--amber-trajectory-)
+      - [Analyzing a DNA Minicircle (PDB Trajectory)](#analyzing-a-dna-minicircle--pdb-trajectory-)
+      - [Analyzing a DNA Minicircle (General Format Trajectory)](#analyzing-a-dna-minicircle--general-format-trajectory-)
+      - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, autodelete)](#analyzing-a-linear-dna-plectoneme--oxdna-trajectory--autodelete-)
+      - [Analyzing a linear DNA Plectoneme (oxDNA Trajectory, deleteatoms)](#analyzing-a-linear-dna-plectoneme--oxdna-trajectory--deleteatoms-)
+  * [Output Formats](#output-formats)
+  * [References](#references)
+
 ## Dependencies/Requirements
 ### General:
 Python 2.7 or Python 3+ (recommended)
