@@ -1,8 +1,9 @@
 # WASP
 Writhe Analysis Software Package (WASP)
-WASP is a software package for characterizing the topological development of ribbon structures particularly targeted at
-at use with molecular dynamics (MD) trajectories.
+WASP is a software package for characterizing the topological development of ribbon structures particularly targeted
+at (but not limited to) use with molecular dynamics (MD) trajectories.
 
+WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (Wp\*) and the double integral writhe (Wr) of various ribbon structures such as DNA helices.
 ## Dependencies/Requirements
 ### General:
 Python 2.7 or Python 3+ (recommended)
@@ -181,3 +182,7 @@ Output files that result from double integral writhe calculations have 2 compone
 ```
 
 In this case, the first column is the writhe value and the second column is the frame number.
+
+## References
+
+WASP uses an implementation of the WrLINE method developed by Thana Sutthibutpong, Sarah A. Harris, and Agnes Noy (https://doi.org/10.1021/acs.jctc.5b00035) for generating axis curves of DNA helices.
