@@ -5,6 +5,9 @@ at (but not limited to) use with molecular dynamics (MD) trajectories.
 
 WASP can be used to calculate the polar writhe (Wp), the extended polar writhe (Wp\*) and the double integral writhe (Wr) of various ribbon structures such as DNA helices.
 
+For detailed information on WASP and what Wr, Wp and Wp\* can be used to measure, please refer to the publication: https://doi.org/10.1101/2020.09.17.301309
+
+
 - [WASP](#wasp)
   - [Dependencies/Requirements](#dependenciesrequirements)
     - [General](#general)
@@ -59,7 +62,7 @@ If you have a molecular dynamics trajectory that is not one of these formats, th
 
 Examples of each format can be found in the **examples** directory for reference.
 
-Using the general format option tells WASP that the trajectory you are giving it is ***already an axis curve***. In other words, you are feeding WASP the exact curve that you want to calculate the writhe of, and the axis curve calculation is skipped. This allows WASP to be used more generally if you wish to calculate an axis curve for your DNA structure using some other method prior to using WASP to calculate the writhe or if you want to analyze the writhing of a curve that is not DNA or not a result of a MD trajectory (i.e. coronal flux ropes or rod filaments). This format consists of a tab spaced cartersian (x,y,z) coordinates on each line with no whitespace between lines. It is important to note that the number of points on the curve should be the same in every frame, as WASP has no way of telling otherwise. When using general format trajectories, some functionalities of WASP are unable to be used such as the ability to stride. See the general format example below for more information.
+Using the general format option tells WASP that the trajectory you are giving it is ***already an axis curve***. In other words, you are feeding WASP the exact curve that you want to calculate the writhe of, and the axis curve calculation is skipped. This allows WASP to be used more generally if you wish to calculate an axis curve for your DNA structure using some other method prior to using WASP to calculate the writhe or if you want to analyze the writhing of a curve that is not DNA or not a result of a MD trajectory (i.e. coronal flux ropes or rod filaments). This format consists of tab spaced cartersian (x,y,z) coordinates on each line with no whitespace between lines. It is important to note that the number of points on the curve should be the same in every frame, as WASP has no way of telling otherwise. When using general format trajectories, some functionalities of WASP are unable to be used such as the ability to stride. See the general format example below for more information.
 
 
 For PDB files, the --xcol argument must be specified. The user should provide the column number (zero-indexed) in the PDB file that contains the x coordinates. In the example PDB trajectory in the **examples** directory, the --xcol argument should be 6.
