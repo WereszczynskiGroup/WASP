@@ -137,7 +137,7 @@ def start_points(frame, twist, nbp):
 
 	top -= 1
 
-        theta_m = 0
+	theta_m = 0
 	
 	while (theta_m < 180.0):
 		theta_m += twist[frame][bottom]
