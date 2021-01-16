@@ -27,7 +27,7 @@ For detailed information on WASP and what Wr, Wp and Wp\* can be used to measure
 
 ## Dependencies/Requirements
 ### General
-Python 2.7 or Python 3+ (recommended)
+Python 2.7 (stable) or Python 3+
 
 C++
 
