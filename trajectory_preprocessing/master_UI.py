@@ -138,7 +138,7 @@ if args.filetype != ("general"):
 	if args.debug == (True):
 		print("writing debug")
 		f = open (incrd + "_debug_backbone.xyz","w")
-		for i in range (len(x)/(nbp*2)):
+		for i in range (int(len(x)/(nbp*2))):
 			f.write(str(nbp*2))
 			f.write("\n \n")
 			for j in range (nbp*2):
